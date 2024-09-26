@@ -43,8 +43,6 @@ def indicator(indi_lbl, page_switch):
 image6 = Image.open('close.png').resize((30, 30))
 close_icon = ImageTk.PhotoImage(image6)
 
-image7 = Image.open('Wallpaper2.png').resize((500, 600))
-wallp = ImageTk.PhotoImage(image7)
 
 def animate_menu():
     current_width = menu_bar.winfo_width()
@@ -75,10 +73,13 @@ def fold_menu():
 
 def home():
     h_page=Frame(page)
-    lb = Label(h_page, image=image7)
-    lb.place()
+    lb = Label(h_page, image=wallp)
+    lb.pack()
 
     h_page.pack(fill=BOTH, expand=True)
+
+image7 = Image.open('Wallpaper2.png').resize((590, 590))
+wallp = ImageTk.PhotoImage(image7)
 
 def methods():
     #label
