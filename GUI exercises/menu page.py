@@ -10,7 +10,7 @@ root.title('Menu')
 #root.withdraw()
 
 #icons 
-image = Image.open('.jpg')
+image = Image.open('toggle2 icon.png').resize((30, 30))
 toggle_icon = ImageTk.PhotoImage(image)
 menu_bar = Frame(root, bg='#384B70')
 toggle_button = Button(menu_bar, image=toggle_icon, bg='#384B70')
