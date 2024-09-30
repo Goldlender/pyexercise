@@ -40,46 +40,72 @@ class Application(tk.Tk):
                 self.configure(bg='#B7B7B7')
 
                 login_win = Log_in(self)
-                login_win.grid(sticky='news', padx=10, pady=10)
+                #login_win.pack()
 
 class Log_in(ttk.Frame):
     def __init__(self, master):
         super().__init__(master)
 
-        self.login_l = Label(self, text='LOGIN', bg='#B7B7B7', fg='#16325B', font=('Courier New',25, 'bold'))
-        self.username_l = Label(self, text='Username', bg='#B7B7B7', fg='#181C14', font=('Times New Roman',14, 'bold'))
-        self.username_e = Entry(self, font=('Courier New',12))
-        self.password_e = Entry(self, show='*', font=('Courier',12))
-        self.password_l = Label(self, text='Password', bg='#B7B7B7', fg='#181C14', font=('Times New Roman',14, 'bold'))
-        self.login_b = Button(self, text='Login', bg='#16325B', fg='#FCF8F3', font=('Times New Roman',14, 'bold'), command = self.login)
+
+        self.login_l = Label(master, text='LOGIN', bg='#B7B7B7', fg='#16325B', font=('Courier New',25, 'bold'))
+        #self.username_l = Label(self, text='Username', bg='#B7B7B7', fg='#181C14', font=('Times New Roman',14, 'bold'))
+        self.username_e = Entry(master, font=('Courier New',12), bg='white', fg='grey', width=15)
+        self.username_e.insert(0, 'Username')
+        self.password_e = Entry(master, show='*', font=('Courier',12), bg = 'white', fg='grey', width=15)
+        self.password_e.insert(0, 'Password')
+        #self.password_l = Label(self, text='Password', bg='#B7B7B7', fg='#181C14', font=('Times New Roman',14, 'bold'))
+        self.login_b = Button(master, text='Login', bg='#16325B', fg='#FCF8F3', font=('Times New Roman',14, 'bold'), command = self.login)
 
         #placing widgets
-        self.login_l.grid(row=0, column=0, columnspan=2, sticky='news', pady=30)
-        self.username_l.grid(row=1, column=0)
-        self.username_e.grid(row=1, column=1, pady=15)
-        self.password_l.grid(row=2, column=0)
-        self.password_e.grid(row=2, column=1, pady=15)
-        self.login_b.grid(row=3, column=0, columnspan=2, pady=30)
+        self.login_l.grid(row=0, column=0, columnspan=2, sticky='news', pady=20)
+        #self.username_l.grid(row=1, column=0)
+        self.username_e.grid(row=1, column=1, pady=5)
+        #self.password_l.grid(row=2, column=0)
+        self.password_e.grid(row=2, column=1, pady=5)
+        self.login_b.grid(row=3, column=0, columnspan=2, pady=20)
+
+        self.password_e.bind('<FocusIn>', self.focus_in)
+        self.password_e.bind('<FocusOut>', self.focus_out)
+        self.username_e.bind('<FocusIn>', self.focus_in)
+        self.username_e.bind('<FocusOut>', self.focus_out)
+        self.password_e.bind('<Return>', self.handle_enter)
+        self.username_e.bind('<Return>', self.handle_enter)
         
+
+    def focus_in(self):
+         self.username_e.delete(0, tk.END)
+         self.username_e.config(fg='black')
+         self.password_e.delete(0, tk.END)
+         self.password_e.config(fg='black')
+
+    def focus_out(self):
+         self.username_e.delete(0, tk.END)
+         self.username_e.config(fg='grey')
+         self.username_e.insert(0, 'Username')
+         self.password_e.delete(0, tk.END)
+         self.password_e.config(fg='grey')
+         self.password_e.insert(0, 'Password')
+
+    def handle_enter(self):
+         print(self.password_e.get())
+         print(self.username_e.get())
+         self.focus_out('dummy')
+  
         
     def login(self):
         username = 'Admin'
         password = '12345'
         if self.username_e.get()==username and self.password_e.get()==password:
             msg.showinfo(title='Login Successful', message='You logged in Successfully')
-            #root.withdraw()
+            #self.withdraw()
         else:
             msg.showerror(title='Login Failed', message='Invalid username or password')
-            self.close()
+            #self.close()
 
-            #self.pack()
-
-        # def close(self):
-        #         #root.quit()
-        #         #root.destroy()
-        #         exit()
-
-                #self.pack()
+    def close(self):
+            #self.quit()
+            #self.destroy()
+            exit()
 
 
 # class Menu:
@@ -232,7 +258,3 @@ class Log_in(ttk.Frame):
 
 if __name__=="__main__":
       main()
-# page = Sign_in(root)
-
-# #run 
-# root.mainloop()
