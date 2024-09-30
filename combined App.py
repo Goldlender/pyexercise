@@ -104,6 +104,12 @@ class Menu:
           image5 = Image.open('account.png').resize((30, 30))
           account_icon = ImageTk.PhotoImage(image5)
 
+          image6 = Image.open('close.png').resize((30, 30))
+          close_icon = ImageTk.PhotoImage(image6)
+
+          image7 = Image.open('Wallpaper2.png').resize((590, 590))
+          wallp = ImageTk.PhotoImage(image7)
+
      def indicator(indi_lbl, page_switch):
           home_ind.config(bg='#5271ff')
           info_ind.config(bg='#5271ff')
@@ -117,10 +123,6 @@ class Menu:
           for frame in page.winfo_children():
                frame.destroy()
                page_switch()
-
-          image6 = Image.open('close.png').resize((30, 30))
-          close_icon = ImageTk.PhotoImage(image6)
-
 
      def animate_menu():
            current_width = menu_bar.winfo_width()
@@ -155,9 +157,7 @@ class Menu:
            
            h_page.pack(fill=BOTH, expand=True)
 
-image7 = Image.open('Wallpaper2.png').resize((590, 590))
-wallp = ImageTk.PhotoImage(image7)
-
+    
      def methods():
       #labels
       m_page=Frame(page)
